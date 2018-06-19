@@ -12,8 +12,7 @@ import java.util.List;
 
 public class ZkthApp extends Application {
     private static ZkthApp mApplition;
-    private  List<Activity> activityList = new LinkedList<Activity>();
-
+    private  List<Activity> activityList = new LinkedList<>();
     public  static   int direction = 2;//1、竖屏 2、横屏
     public static String serverIp = "19.0.0.28";
     @Override

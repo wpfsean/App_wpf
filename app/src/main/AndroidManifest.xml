@@ -49,6 +49,7 @@
 
         <activity
             android:name=".page.Main"
+            android:launchMode="singleTop"
             android:configChanges="orientation|keyboardHidden"></activity>
     </application>
 

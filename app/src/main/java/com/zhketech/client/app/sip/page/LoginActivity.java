@@ -36,7 +36,6 @@ public class LoginActivity extends BaseActivity {
     String native_ip;
 
 
-
     @Override
     public int intiLayout() {
         return R.layout.activity_login;
@@ -51,17 +50,18 @@ public class LoginActivity extends BaseActivity {
     public void initData() {
         native_ip = PhoneUtils.displayIpAddress(this);
 
-        String logined_name = (String) SharedPreferencesUtils.getObject(ZkthApp.getInstance(),"username","");
-        String logined_pass = (String) SharedPreferencesUtils.getObject(ZkthApp.getInstance(),"userpass","");
+        String logined_name = (String) SharedPreferencesUtils.getObject(ZkthApp.getInstance(), "username", "");
+        String logined_pass = (String) SharedPreferencesUtils.getObject(ZkthApp.getInstance(), "userpass", "");
         //输入框显示用户名和密码
         username.setText(logined_name);
         userpass.setText(logined_pass);
         //判断是否是自动 登录，如果是自动登录就直接跳转到主页面
-        boolean isAutoLogin = (boolean) SharedPreferencesUtils.getObject(ZkthApp.getInstance(),"auto",false);
-        if (isAutoLogin == true){
+        boolean isAutoLogin = (boolean) SharedPreferencesUtils.getObject(ZkthApp.getInstance(), "auto", false);
+        if (isAutoLogin == true) {
             Intent intent = new Intent();
-            intent.setClass(LoginActivity.this,Main.class);
+            intent.setClass(LoginActivity.this, Main.class);
             startActivity(intent);
+            LoginActivity.this.finish();
         }
     }
 
@@ -72,18 +72,15 @@ public class LoginActivity extends BaseActivity {
         final String pass = userpass.getText().toString().trim();
         isRemember = remeemberPass.isChecked();
         isAuto = autoLogin.isChecked();
-        Logutils.i("..\n" + isRemember + "\n" + isAuto);
         if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(pass)) {
             LoginBean loginBean = new LoginBean();
             loginBean.setUsername(name);
             loginBean.setPass(pass);
-            if (!TextUtils.isEmpty(native_ip)){
+            if (!TextUtils.isEmpty(native_ip)) {
                 loginBean.setIp(name);
-            }else {
+            } else {
                 loginBean.setIp("19.0.0.79");
             }
-
-
             LoginThread loginThread = new LoginThread(LoginActivity.this, loginBean, new LoginThread.IsLoginListern() {
                 @Override
                 public void loginStatus(String status) {
@@ -91,18 +88,19 @@ public class LoginActivity extends BaseActivity {
                     if (!TextUtils.isEmpty(result)) {
                         if (result.equals("success")) {
                             //如果复选了就存储相关的信息
-                            if (isRemember == true){
-                                SharedPreferencesUtils.putObject(ZkthApp.getInstance(),"username",name);
-                                SharedPreferencesUtils.putObject(ZkthApp.getInstance(),"userpass",pass);
+                            if (isRemember == true) {
+                                SharedPreferencesUtils.putObject(ZkthApp.getInstance(), "username", name);
+                                SharedPreferencesUtils.putObject(ZkthApp.getInstance(), "userpass", pass);
                             }
-                            if (isAuto){
-                                SharedPreferencesUtils.putObject(ZkthApp.getInstance(),"auto",true);
+                            if (isAuto) {
+                                SharedPreferencesUtils.putObject(ZkthApp.getInstance(), "auto", true);
                             }
                             try {
                                 Thread.sleep(2 * 1000);
                                 Intent intent = new Intent();
                                 intent.setClass(LoginActivity.this, Main.class);
                                 startActivity(intent);
+                                LoginActivity.this.finish();
                             } catch (InterruptedException e) {
                                 Logutils.e("Login error");
                             }
@@ -110,7 +108,7 @@ public class LoginActivity extends BaseActivity {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                  toastShort("未知原因，登陆失败!!!");
+                                    toastShort("未知原因，登陆失败!!!");
                                 }
                             });
                         }
@@ -118,13 +116,19 @@ public class LoginActivity extends BaseActivity {
                 }
             });
             loginThread.start();
+        }else {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    toastShort("EditText null");
+                }
+            });
         }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        LoginActivity.this.finish();
     }
 }
 
