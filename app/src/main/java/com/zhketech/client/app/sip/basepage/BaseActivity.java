@@ -36,6 +36,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         ActionBar actionBar = this.getActionBar();
         if (actionBar != null) actionBar.hide();
         hideStatusBar();
+        setContentView(intiLayout());
         int direction = ZkthApp.getInstance().direction;
         if (direction == 1) {
             this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -44,7 +45,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
             setContentView(intiLayout());
         }
-
+        ZkthApp.getInstance().addActivity(this);
         initView();
         initData();
     }
@@ -91,6 +92,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
+
 
 
 }

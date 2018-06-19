@@ -10,6 +10,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    useLibrary 'org.apache.http.legacy'
     buildTypes {
         release {
             minifyEnabled false
@@ -36,9 +37,14 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:0.5'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
 
-
+    //linphone引入
     compile(name:'liblinphone-android-sdk', ext:'aar')
+    //注解类 butterknife
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    //图片处理类 glide
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    //recyclearview
+    compile 'com.android.support:recyclerview-v7:26+'
 
 }
