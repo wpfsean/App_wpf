@@ -1,7 +1,6 @@
-package com.zhketech.client.app.sip.sip.tils;
+package com.zhketech.client.app.sip.phone.tils;
 
 import android.content.Context;
-import android.util.Log;
 
 import org.linphone.core.LinphoneAddress;
 import org.linphone.core.LinphoneAuthInfo;

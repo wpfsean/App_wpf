@@ -3,25 +3,19 @@ package com.zhketech.client.app.sip;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 
-import com.zhketech.client.app.sip.sip.tils.Linphone;
-import com.zhketech.client.app.sip.sip.tils.MessageCallback;
-import com.zhketech.client.app.sip.sip.tils.PhoneCallback;
-import com.zhketech.client.app.sip.sip.tils.RegistrationCallback;
-import com.zhketech.client.app.sip.sip.tils.SipService;
+import com.zhketech.client.app.sip.phone.tils.Linphone;
+import com.zhketech.client.app.sip.phone.tils.MessageCallback;
+import com.zhketech.client.app.sip.phone.tils.PhoneCallback;
+import com.zhketech.client.app.sip.phone.tils.SipService;
 
-import org.linphone.core.LinphoneAddress;
 import org.linphone.core.LinphoneCall;
 import org.linphone.core.LinphoneChatMessage;
-import org.linphone.core.LinphoneChatRoom;
-import org.linphone.core.LinphoneContent;
-import org.linphone.core.LinphoneCore;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -123,12 +117,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     @OnClick(R.id.send_message)
-    public void  send_Mess(View view){
-
-        Log.i("TAG","send Mess");
-
+    public void send_Mess(View view) {
 
 
     }

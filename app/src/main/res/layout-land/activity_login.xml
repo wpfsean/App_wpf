@@ -11,6 +11,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="ZZZZZZZZZZZZZZZZzzzzzz"/>
+        android:text="哈 哈 。我横屏"/>
+
+
+    <Button
+        android:id="@+id/custom_direction"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="切换方向"
+        />
 
 </LinearLayout>

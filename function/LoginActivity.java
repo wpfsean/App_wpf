@@ -7,9 +7,9 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.zhketech.client.app.sip.sip.tils.Linphone;
-import com.zhketech.client.app.sip.sip.tils.SipService;
-import com.zhketech.client.app.sip.sip.tils.RegistrationCallback;
+import com.zhketech.client.app.sip.phone.tils.Linphone;
+import com.zhketech.client.app.sip.phone.tils.SipService;
+import com.zhketech.client.app.sip.phone.tils.RegistrationCallback;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,6 +51,39 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             goToMainActivity();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+        Linphone.addCallback(new RegistrationCallback() {
+            @Override
+            public void registrationNone() {
+                super.registrationNone();
+            }
+
+            @Override
+            public void registrationProgress() {
+                super.registrationProgress();
+            }
+
+            @Override
+            public void registrationOk() {
+                super.registrationOk();
+            }
+
+            @Override
+            public void registrationCleared() {
+                super.registrationCleared();
+            }
+
+            @Override
+            public void registrationFailed() {
+                super.registrationFailed();
+            }
+        },null);
     }
 
     @OnClick(R.id.press_login)

@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.SurfaceView;
 
-import com.zhketech.client.app.sip.sip.tils.Linphone;
+import com.zhketech.client.app.sip.phone.tils.Linphone;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

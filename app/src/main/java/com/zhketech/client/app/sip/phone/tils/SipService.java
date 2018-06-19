@@ -1,4 +1,4 @@
-package com.zhketech.client.app.sip.sip.tils;
+package com.zhketech.client.app.sip.phone.tils;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;

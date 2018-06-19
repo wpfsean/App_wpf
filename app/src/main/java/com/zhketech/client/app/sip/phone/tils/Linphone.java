@@ -1,4 +1,4 @@
-package com.zhketech.client.app.sip.sip.tils;
+package com.zhketech.client.app.sip.phone.tils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,7 +6,6 @@ import android.opengl.GLSurfaceView;
 import android.view.SurfaceView;
 
 import org.linphone.core.LinphoneCallParams;
-import org.linphone.core.LinphoneChatMessage;
 import org.linphone.core.LinphoneCore;
 import org.linphone.core.LinphoneCoreException;
 import org.linphone.mediastream.video.AndroidVideoWindowImpl;
