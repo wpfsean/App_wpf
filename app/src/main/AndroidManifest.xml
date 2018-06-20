@@ -50,6 +50,10 @@
 
         <service android:name=".phone.tils.SipService" />
         <service android:name=".services.ReceiverMessageService" />
+        <!--心跳服务-->
+        <service android:name=".services.SendheartService"/>
+        <!--心跳广播-->
+        <receiver android:name=".callbacks.SendHeartReceiver"/>
 
         <activity
             android:name=".page.SettingActivity"

@@ -186,7 +186,7 @@ public class LoginActivity extends BaseActivity {
             } else {
                 loginBean.setNative_ip("19.0.0.79");
             }
-            ZkthApp.getInstance().setServerIp(server_IP);
+
             LoginToService loginThread = new LoginToService(LoginActivity.this, loginBean, new LoginToService.IsLoginListern() {
                 @Override
                 public void loginStatus(String status) {
@@ -203,8 +203,8 @@ public class LoginActivity extends BaseActivity {
                             if (isAuto) {
                                 SharedPreferencesUtils.putObject(ZkthApp.getInstance(), "auto", true);
                             }
-                            Intent intent1 = new Intent(LoginActivity.this, ReceiverMessageService.class);
-                            startService(intent1);
+//                            Intent intent1 = new Intent(LoginActivity.this, ReceiverMessageService.class);
+//                            startService(intent1);
 
                             try {
                                 Thread.sleep(1 * 1000);

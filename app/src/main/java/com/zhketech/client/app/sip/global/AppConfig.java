@@ -20,9 +20,12 @@ public class AppConfig {
     //当前设备的ip
     public static String current_ip = (String) SharedPreferencesUtils.getObject(ZkthApp.getInstance(), "current_ip", "");
     //服务器ip
-    public static String server_ip = (String) SharedPreferencesUtils.getObject(ZkthApp.getInstance(), "current_ip", "");
+    public static String server_ip = (String) SharedPreferencesUtils.getObject(ZkthApp.getInstance(), "serverip", "");
     //登录端口
     public  static  int server_port = 2010;
+    //发送心跳的端口
+    public static  int heart_port = 2020;
+
     //数据格式
     public static String dataFormat = "GB2312";
 

@@ -13,6 +13,7 @@ import com.zhketech.client.app.sip.ResolveRtsp;
 import com.zhketech.client.app.sip.basepage.BaseActivity;
 import com.zhketech.client.app.sip.beans.DeviceInfor;
 import com.zhketech.client.app.sip.global.AppConfig;
+import com.zhketech.client.app.sip.services.SendheartService;
 import com.zhketech.client.app.sip.utils.Logutils;
 
 import butterknife.BindView;
@@ -42,6 +43,7 @@ public class Main  extends BaseActivity implements View.OnClickListener {
     @Override
     public void initData() {
 
+        startService(new Intent(this, SendheartService.class));
     }
 
     @Override
@@ -52,14 +54,12 @@ public class Main  extends BaseActivity implements View.OnClickListener {
 
     @OnClick(R.id.button_setup)
     public void setDirection(View view){
-
         int direction = ZkthApp.getInstance().direction;
         if (direction == 1){
             ZkthApp.getInstance().setDirection(2);
         }else if (direction == 2){
             ZkthApp.getInstance().setDirection(1);
         }
-
         restartApplication();
     }
 

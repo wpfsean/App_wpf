@@ -8,7 +8,6 @@ import com.zhketech.client.app.sip.R;
 
 /**
  * 资源泛型：可以为string可，uri类型，File file，Integer resourceId，byte[] model；
- * Created by yangyoutao on 2016/7/27.
  */
 public class ImageHelper {
 
