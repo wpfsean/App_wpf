@@ -13,8 +13,8 @@ import java.util.List;
 public class ZkthApp extends Application {
     private static ZkthApp mApplition;
     private  List<Activity> activityList = new LinkedList<>();
-    public  static   int direction = 1;//1、竖屏 2、横屏
-    public static String serverIp = "19.0.0.28";
+    public  static   int direction = 2;//1、竖屏 2、横屏
+    public static String serverIp = "19.0.0.11";
     @Override
     public void onCreate() {
         super.onCreate();
@@ -48,7 +48,7 @@ public class ZkthApp extends Application {
                 activity.finish();
             }
         }
-        System.exit(0);
+//        System.exit(0);
     }
     //设置方向
     public void setDirection(int p){

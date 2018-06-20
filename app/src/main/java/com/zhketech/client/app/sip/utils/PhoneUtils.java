@@ -12,9 +12,7 @@ import android.os.PowerManager;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-
 import org.apache.http.conn.util.InetAddressUtils;
-
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -24,6 +22,7 @@ import java.util.Collections;
 
 /**
  * Created by Root on 2018/4/20.
+ *
  */
 
 public class PhoneUtils {

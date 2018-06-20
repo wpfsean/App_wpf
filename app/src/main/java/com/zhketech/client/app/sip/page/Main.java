@@ -17,13 +17,15 @@ import com.zhketech.client.app.sip.utils.Logutils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Root on 2018/6/19.
+ *
+ * 主页面（6个按钮）
  */
 
 public class Main  extends BaseActivity implements View.OnClickListener {
-
 
 
     @Override
@@ -44,34 +46,21 @@ public class Main  extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent();
-        switch (v.getId()) {
-            case R.id.button_intercom:
-                DeviceInfor deviceInfor = new DeviceInfor();
-                deviceInfor.setUsername("admin");
-                deviceInfor.setPassword("pass");
-                deviceInfor.setServiceURL("http://19.0.0.213/onvif/device_service");
-                ResolveRtsp resolveRtsp = new ResolveRtsp(deviceInfor);
-                resolveRtsp.start();
-
-                break;
-            case R.id.button_phone:
-
-                break;
-            case R.id.button_setup:
-                intent.setClass(Main.this,SettingActivity.class);
-                startActivity(intent);
-
-                break;
-            case R.id.button_video:
-                break;
-            case R.id.button_alarm://跳转到报警页面
-
-                break;
-            case R.id.button_applyforplay:  //申请供弹
-
-                break;
-        }
 
     }
+
+
+    @OnClick(R.id.button_setup)
+    public void setDirection(View view){
+
+        int direction = ZkthApp.getInstance().direction;
+        if (direction == 1){
+            ZkthApp.getInstance().setDirection(2);
+        }else if (direction == 2){
+            ZkthApp.getInstance().setDirection(1);
+        }
+
+        restartApplication();
+    }
+
 }

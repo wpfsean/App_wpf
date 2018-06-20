@@ -88,6 +88,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void restartApplication() {
+        ZkthApp.getInstance().exit();
         final Intent intent = getPackageManager().getLaunchIntentForPackage(getPackageName());
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);

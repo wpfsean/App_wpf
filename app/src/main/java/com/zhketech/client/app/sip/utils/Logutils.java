@@ -4,6 +4,8 @@ import android.util.Log;
 
 /**
  * Created by Root on 2018/4/7.
+ *
+ * Log日志输出工具类
  */
 
 public class Logutils {
@@ -37,6 +39,12 @@ public class Logutils {
     {
         if (isLog)
             Log.v(TAG, msg);
+    }
+
+    public static void w(String msg)
+    {
+        if (isLog)
+            Log.w(TAG, msg);
     }
 
     // 下面是传入自定义tag的函数

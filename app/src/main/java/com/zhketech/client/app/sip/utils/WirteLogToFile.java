@@ -13,9 +13,9 @@ import java.util.Date;
 
 /**
  * 日志写入
- *
+ * Log日志写入文件
  */
-public class LogU {
+public class WirteLogToFile {
 	/**
 	 * 开发阶段(打印日志 )
 	 */
@@ -44,7 +44,7 @@ public class LogU {
 				File externalStorageDirectory = Environment
 						.getExternalStorageDirectory();
 				path = externalStorageDirectory.getAbsolutePath()
-						+ "/wpf/";
+						+ "/zkth/";
 				File directory = new File(path);
 				if (!directory.exists()) {
 					directory.mkdirs();
@@ -60,7 +60,7 @@ public class LogU {
 				try {
 					outputStream = new FileOutputStream(file, true);
 				} catch (FileNotFoundException e) {
-					Log.w("TAG", "文件不存在");
+					Logutils.w("文件不存在");
 				}
 			} else {
 				Log.w("TAG", "sd存储不足");
@@ -71,7 +71,7 @@ public class LogU {
 	}
 
 	public static void info(String msg) {
-		info(LogU.class, msg);
+		info(WirteLogToFile.class, msg);
 	}
 
 	public static void info(Class clazz, String msg) {

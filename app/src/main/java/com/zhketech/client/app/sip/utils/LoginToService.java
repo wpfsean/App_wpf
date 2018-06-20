@@ -2,8 +2,8 @@ package com.zhketech.client.app.sip.utils;
 
 import android.content.Context;
 
-import com.zhketech.client.app.sip.beans.LoginBean;
-import com.zhketech.client.app.sip.page.ZkthApp;
+import com.zhketech.client.app.sip.beans.LoginParameters;
+import com.zhketech.client.app.sip.global.AppConfig;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -13,20 +13,17 @@ import java.net.Socket;
  * 用天实现登陆 功能
  */
 
-public class LoginThread implements Runnable {
+public class LoginToService implements Runnable {
     IsLoginListern listern;
     Context mContext;
-    LoginBean loginBean;
-
-    public LoginThread(Context mContext, LoginBean loginBean, IsLoginListern listern) {
+    LoginParameters loginBean;
+    public LoginToService(Context mContext, LoginParameters loginBean, IsLoginListern listern) {
         this.mContext = mContext;
         this.loginBean = loginBean;
         this.listern = listern;
     }
-
     @Override
     public void run() {
-
         Socket socket = null;
         InputStream is = null;//读取输入流
         try {
@@ -42,13 +39,13 @@ public class LoginThread implements Runnable {
             bys[6] = 0;
             bys[7] = 0;
             //用户名列表
-            String name = loginBean.getUsername() + "/" + loginBean.getPass() + "/" + loginBean.getIp();
-            byte[] na = name.getBytes("GB2312");
+            String name = loginBean.getUsername() + "/" + loginBean.getPass() + "/" + loginBean.getNative_ip();
+            byte[] na = name.getBytes(AppConfig.dataFormat);
             for (int i = 0; i < na.length; i++) {
                 bys[i + 8] = na[i];
             }
             //socket请求
-            socket = new Socket(ZkthApp.getInstance().serverIp, 2010);
+            socket = new Socket(loginBean.getServer_ip(), AppConfig.server_port);
             OutputStream os = socket.getOutputStream();
             os.write(bys);
             os.flush();
@@ -77,7 +74,6 @@ public class LoginThread implements Runnable {
             }
         }
     }
-
     public void start() {
         new Thread(this).start();
     }
