@@ -38,7 +38,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
 
     //linphone引入
-    compile(name:'liblinphone-android-sdk', ext:'aar')
+    compile(name: 'liblinphone-android-sdk', ext: 'aar')
     //注解类 butterknife
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'

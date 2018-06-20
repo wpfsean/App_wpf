@@ -20,6 +20,7 @@
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
     <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
@@ -41,16 +42,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".phone.tils.SipService"></service>
+
+        <service android:name=".phone.tils.SipService" />
 
         <activity
             android:name=".page.SettingActivity"
-            android:configChanges="orientation|keyboardHidden"></activity>
-
+            android:configChanges="orientation|keyboardHidden" />
         <activity
             android:name=".page.Main"
-            android:launchMode="singleTop"
-            android:configChanges="orientation|keyboardHidden"></activity>
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTop" />
+        <activity android:name=".page.OnvifActivity"></activity>
     </application>
 
 </manifest>
