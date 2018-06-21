@@ -5,7 +5,7 @@ import com.zhketech.client.app.sip.utils.SharedPreferencesUtils;
 
 /**
  * Created by Root on 2018/6/19.
- *
+ * <p>
  * 全局的配置参数
  */
 
@@ -13,6 +13,7 @@ public class AppConfig {
     public AppConfig() {
         throw new UnsupportedOperationException("not't constructed");
     }
+
     //当前的用户名
     public static String current_user = (String) SharedPreferencesUtils.getObject(ZkthApp.getInstance(), "username", "");
     //当前的密码
@@ -22,9 +23,9 @@ public class AppConfig {
     //服务器ip
     public static String server_ip = (String) SharedPreferencesUtils.getObject(ZkthApp.getInstance(), "serverip", "");
     //登录端口
-    public  static  int server_port = 2010;
+    public static int server_port = 2010;
     //发送心跳的端口
-    public static  int heart_port = 2020;
+    public static int heart_port = 2020;
     //数据格式
     public static String dataFormat = "GB2312";
     //video 请求的数据头
@@ -43,6 +44,15 @@ public class AppConfig {
     //sip服务器管理员密码
     public static String sipServerPass = "123456";
     //sip服务器获取所有的sip用户信息
-    public static String sipServerDataUrl = "http://"+native_sip_server_ip+":8080/openapi/localuser/list?{\"syskey\":\""+sipServerPass+"\"}";
+    public static String sipServerDataUrl = "http://" + native_sip_server_ip + ":8080/openapi/localuser/list?{\"syskey\":\"" + sipServerPass + "\"}";
+
+
+    /**
+     * ......................................
+     * 蓝牙模块
+     */
+    public static String blueToothMac = "D0:33:8B:F6:1A:84";
+    public static String serviceUuid = "0000FFF0-0000-1000-8000-00805F9B34FB";
+    public static String charateristicUuid = "0000FFF6-0000-1000-8000-00805F9B34FB";
 
 }

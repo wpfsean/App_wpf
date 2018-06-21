@@ -26,6 +26,9 @@
     <uses-permission android:name="android.permission.USE_SIP" />
     <uses-permission android:name="android.permission.READ_CALL_LOG" />
     <uses-permission android:name="android.permission.BATTERY_STATS" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
 
     <uses-feature
         android:name="android.hardware.camera"

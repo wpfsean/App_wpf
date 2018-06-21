@@ -47,4 +47,6 @@ dependencies {
     //recyclearview
     compile 'com.android.support:recyclerview-v7:26+'
 
+    implementation files('libs/FastBLE-2.3.2.jar')
+
 }

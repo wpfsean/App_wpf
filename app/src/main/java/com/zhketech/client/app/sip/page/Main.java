@@ -1,13 +1,19 @@
 package com.zhketech.client.app.sip.page;
 
+import android.bluetooth.BluetoothGatt;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
+import com.clj.fastble.BleManager;
+import com.clj.fastble.callback.BleGattCallback;
+import com.clj.fastble.data.BleDevice;
+import com.clj.fastble.exception.BleException;
 import com.zhketech.client.app.sip.R;
 import com.zhketech.client.app.sip.basepage.BaseActivity;
+import com.zhketech.client.app.sip.global.AppConfig;
 import com.zhketech.client.app.sip.phone.tils.Linphone;
 import com.zhketech.client.app.sip.phone.tils.PhoneCallback;
 import com.zhketech.client.app.sip.phone.tils.RegistrationCallback;
@@ -46,7 +52,21 @@ public class Main  extends BaseActivity implements View.OnClickListener {
     @Override
     public void initData() {
         startService(new Intent(this, SendheartService.class));
+        configureBlueTooth();
         loginToSipServer();
+
+    }
+
+    //配置蓝牙功能
+    private void configureBlueTooth() {
+        BleManager.getInstance().init(getApplication());
+        BleManager.getInstance()
+                .enableLog(true)
+                .setReConnectCount(1, 2000)
+                .setSplitWriteNum(20)
+                .setConnectOverTime(10000)
+                .setOperateTimeout(5000);
+
 
     }
 
@@ -86,6 +106,54 @@ public class Main  extends BaseActivity implements View.OnClickListener {
     }
     @Override
     public void onClick(View v) {
+
+    }
+
+
+    @OnClick(R.id.button_applyforplay)
+    public void buleToothOpenBox(View view){
+
+        //蓝牙弹箱
+
+
+       boolean isOpenBlueTooth = BleManager.getInstance().isBlueEnable();
+       if (!isOpenBlueTooth){
+           BleManager.getInstance().enableBluetooth();
+       }
+
+       BleManager.getInstance().connect(AppConfig.blueToothMac, new BleGattCallback() {
+           @Override
+           public void onStartConnect() {
+
+           }
+
+           @Override
+           public void onConnectFail(BleDevice bleDevice, final BleException e) {
+               runOnUiThread(new Runnable() {
+                   @Override
+                   public void run() {
+                       toastShort("连接失败："+e.getDescription());
+                   }
+               });
+           }
+
+           @Override
+           public void onConnectSuccess(final BleDevice bleDevice, BluetoothGatt bluetoothGatt, int i) {
+               runOnUiThread(new Runnable() {
+                   @Override
+                   public void run() {
+                       toastShort("连接成功："+bleDevice.getName()+bleDevice.getMac());
+                   }
+               });
+           }
+
+           @Override
+           public void onDisConnected(boolean b, BleDevice bleDevice, BluetoothGatt bluetoothGatt, int i) {
+
+           }
+       });
+
+
 
     }
 
