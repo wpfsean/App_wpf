@@ -3,9 +3,12 @@ package com.zhketech.client.app.sip.basepage;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Application;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,14 +21,15 @@ import android.widget.Toast;
 
 import com.zhketech.client.app.sip.R;
 import com.zhketech.client.app.sip.page.ZkthApp;
+import com.zhketech.client.app.sip.utils.Logutils;
 
 /**
  * Created by Root on 2018/6/19.
+ *
+ *
  */
 
 public abstract class BaseActivity extends AppCompatActivity {
-    protected final String TAG = this.getClass().getSimpleName();
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,7 +97,4 @@ public abstract class BaseActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
-
-
-
 }

@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Checkable;
@@ -16,11 +17,16 @@ import android.widget.EditText;
 
 import com.zhketech.client.app.sip.R;
 import com.zhketech.client.app.sip.basepage.BaseActivity;
+import com.zhketech.client.app.sip.beans.DeviceInfor;
 import com.zhketech.client.app.sip.beans.LoginParameters;
-import com.zhketech.client.app.sip.services.ReceiverMessageService;
+import com.zhketech.client.app.sip.beans.SipBean;
+import com.zhketech.client.app.sip.beans.VideoBen;
+import com.zhketech.client.app.sip.callbacks.RequestSipSourcesThread;
+import com.zhketech.client.app.sip.callbacks.RequestVideoSourcesThread;
 import com.zhketech.client.app.sip.utils.LoginToService;
 import com.zhketech.client.app.sip.utils.Logutils;
 import com.zhketech.client.app.sip.utils.PhoneUtils;
+import com.zhketech.client.app.sip.utils.ResolveRtsp;
 import com.zhketech.client.app.sip.utils.SharedPreferencesUtils;
 
 import java.util.ArrayList;
@@ -89,6 +95,7 @@ public class LoginActivity extends BaseActivity {
             initPageData();
         }
     }
+
     private void requestPermission() {
         mPermissionList.clear();
         for (String permission : permissions) {
@@ -135,6 +142,7 @@ public class LoginActivity extends BaseActivity {
 
 
     private void initPageData() {
+
 
         native_ip = PhoneUtils.displayIpAddress(this);
         String logined_name = (String) SharedPreferencesUtils.getObject(ZkthApp.getInstance(), "username", "");
@@ -211,6 +219,7 @@ public class LoginActivity extends BaseActivity {
                                 Intent intent = new Intent();
                                 intent.setClass(LoginActivity.this, Main.class);
                                 startActivity(intent);
+                                obtainDataCMS();
                                 LoginActivity.this.finish();
                             } catch (InterruptedException e) {
                                 Logutils.e("Login error");
@@ -237,10 +246,62 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
+    private void obtainDataCMS() {
+
+        RequestVideoSourcesThread requestVideoSourcesThread = new RequestVideoSourcesThread(LoginActivity.this, new RequestVideoSourcesThread.GetDataListener() {
+            @Override
+            public void getResult(List<VideoBen> devices) {
+                if (devices != null && devices.size() > 0)
+                    resolverRTSP(devices);
+                else
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            toastShort("未获取到视频资源");
+                        }
+                    });
+            }
+        });
+        requestVideoSourcesThread.start();
+
+        RequestSipSourcesThread requestSipSourcesThread = new RequestSipSourcesThread(LoginActivity.this, "0", new RequestSipSourcesThread.SipListern() {
+            @Override
+            public void getDataListern(List<SipBean> mList) {
+
+                Logutils.i("mlist:"+mList.toString());
+
+            }
+        });
+        requestSipSourcesThread.start();
+    }
+
+
+    private synchronized void  resolverRTSP(List<VideoBen> devices) {
+
+        for (int i=0;i<devices.size();i++){
+            if (devices.get(i).getDevicetype().equals("ONVIF")) {
+                DeviceInfor deviceInfor = new DeviceInfor();
+                deviceInfor.setUsername(devices.get(i).getUsername());
+                deviceInfor.setPassword(devices.get(i).getPassword());
+                deviceInfor.setChannel(devices.get(i).getChannel());
+                deviceInfor.setServiceURL("http://" + devices.get(i).getIp() + "/onvif/device_service");
+                ResolveRtsp resolveRtsp = new ResolveRtsp(deviceInfor);
+                resolveRtsp.setOnHttpSoapListener(new ResolveRtsp.OnHttpSoapListener() {
+                    @Override
+                    public void OnHttpSoapDone(DeviceInfor camera, String uri, boolean success) {
+
+                    }
+                });
+                resolveRtsp.start();
+            } else if (devices.get(i).getDevicetype().equals("RTSP")) {
+                String rtsp = "rtsp://" + devices.get(i).getUsername() + ":" + devices.get(i).getPassword() + "@" + devices.get(i).getIp() + ":" + devices.get(i).getPort() + "/" + devices.get(i).getChannel();
+               // Logutils.i("rtsp:"+rtsp);
+            }
+        }
+    }
     @Override
     protected void onPause() {
         super.onPause();
     }
-
 }
 

@@ -15,7 +15,7 @@ import java.util.Date;
  * 日志写入
  * Log日志写入文件
  */
-public class WirteLogToFile {
+public class WriteLogToFile {
 	/**
 	 * 开发阶段(打印日志 )
 	 */
@@ -71,7 +71,7 @@ public class WirteLogToFile {
 	}
 
 	public static void info(String msg) {
-		info(WirteLogToFile.class, msg);
+		info(WriteLogToFile.class, msg);
 	}
 
 	public static void info(Class clazz, String msg) {

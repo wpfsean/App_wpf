@@ -25,10 +25,24 @@ public class AppConfig {
     public  static  int server_port = 2010;
     //发送心跳的端口
     public static  int heart_port = 2020;
-
     //数据格式
     public static String dataFormat = "GB2312";
+    //video 请求的数据头
+    public static String video_header_id = "ZKTH";
+
+    //sip信息 服务器地址
+    public static String native_sip_server_ip = (String) SharedPreferencesUtils.getObject(ZkthApp.getInstance(), "sip_server_ip", "");
+
+    //sip号码
+    public static String native_sip_name = (String) SharedPreferencesUtils.getObject(ZkthApp.getInstance(), "sip_name", "");
+
+    //sip密码
+    public static String native_sip_pass = (String) SharedPreferencesUtils.getObject(ZkthApp.getInstance(), "sip_pass", "");
 
 
+    //sip服务器管理员密码
+    public static String sipServerPass = "123456";
+    //sip服务器获取所有的sip用户信息
+    public static String sipServerDataUrl = "http://"+native_sip_server_ip+":8080/openapi/localuser/list?{\"syskey\":\""+sipServerPass+"\"}";
 
 }
